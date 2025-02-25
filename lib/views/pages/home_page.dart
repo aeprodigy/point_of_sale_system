@@ -61,8 +61,8 @@ class _HomePageState extends State<HomePage> {
 
                       // Cart Badge
                       Positioned(
-                        right: -5,
-                        top: -5,
+                        right: -8,
+                        top: -15,
                         child: Consumer<CartProvider>(
                           builder: (context, cartProvider, child) {
                             int cartCount =
