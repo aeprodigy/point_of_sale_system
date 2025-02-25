@@ -1,8 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:point_on_sale_system/providers/cart_provider.dart';
+import 'package:point_on_sale_system/providers/product_provider.dart';
 import 'package:point_on_sale_system/views/screens/login_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    //providers registration
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create:(_)=> ProductProvider()..loadProducts()),
+        ChangeNotifierProvider(create: (_)=> CartProvider()),
+
+      ],
+      child: const MyApp(),
+    )
+  );
 }
 
 class MyApp extends StatelessWidget {

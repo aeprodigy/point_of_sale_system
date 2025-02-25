@@ -1,0 +1,56 @@
+[
+    {
+        "id": 1,
+        "name": "Classic Burger",
+        "price": 5.99,
+        "image": "assets/burger1.png",
+        "description": "A delicious classic beef burger with lettuce, tomato, and cheese.",
+        "category": "Burgers",
+        "stock": 20
+    },
+    {
+        "id": 2,
+        "name": "Cheese Burger",
+        "price": 6.49,
+        "image": "assets/burger2.png",
+        "description": "Juicy beef patty topped with melted cheese and fresh veggies.",
+        "category": "Burgers",
+        "stock": 15
+    },
+    {
+        "id": 3,
+        "name": "Chicken Sandwich",
+        "price": 5.99,
+        "image": "assets/sandwich1.png",
+        "description": "Crispy chicken sandwich with lettuce, mayo, and pickles.",
+        "category": "Sandwiches",
+        "stock": 18
+    },
+    {
+        "id": 4,
+        "name": "Strawberry Smoothie",
+        "price": 4.99,
+        "image": "assets/smoothie1.png",
+        "description": "Refreshing strawberry smoothie made with real fruits and yogurt.",
+        "category": "Smoothies",
+        "stock": 25
+    },
+    {
+        "id": 5,
+        "name": "Mango Smoothie",
+        "price": 4.99,
+        "image": "assets/smoothie2.png",
+        "description": "Creamy mango smoothie with a hint of honey and yogurt.",
+        "category": "Smoothies",
+        "stock": 22
+    },
+    {
+        "id": 6,
+        "name": "Berry Blast Smoothie",
+        "price": 5.49,
+        "image": "assets/smoothie3.png",
+        "description": "A delicious blend of mixed berries, banana, and yogurt.",
+        "category": "Smoothies",
+        "stock": 30
+    }
+]

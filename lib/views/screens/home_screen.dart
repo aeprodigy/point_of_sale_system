@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:point_on_sale_system/providers/cart_provider.dart';
+import 'package:point_on_sale_system/providers/product_provider.dart';
 import 'package:point_on_sale_system/views/widgets/text_field_input.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,8 +24,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //providers
+    final productProvider = Provider.of<ProductProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
-      backgroundColor: Colors.white ,
+      backgroundColor: Colors.white,
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -107,8 +113,122 @@ class _HomeScreenState extends State<HomeScreen> {
               },
             ),
           ),
+
+          //the Products grid.
+          Expanded(
+              child: productProvider.product.isEmpty
+                  ? CircularProgressIndicator()
+                  : GridView.builder(
+                      itemCount: productProvider.product.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2, // Number of columns
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                        childAspectRatio: 0.8, // Adjust the item size
+                      ),
+                      itemBuilder: (context, index) {
+                        final products = productProvider.product[index];
+                        //the product card.
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          child: Card(
+                            color: Colors.white,
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0),
+                            ),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                // Stack to overlay image on a bigger circle
+                                Stack(
+                                  alignment: Alignment.center,
+                                  children: [
+                                    // Background Circle
+                                    Container(
+                                      width: 100, // Bigger than image
+                                      height: 100, // Bigger than image
+                                      decoration: BoxDecoration(
+                                        color: Colors
+                                            .white, // Light gray background
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color:
+                                              Colors.pink[100]!, // Border color
+                                          width: 10.0, // Border thickness
+                                        ),
+                                      ),
+                                    ),
+                                    // Image
+                                    Container(
+                                      height: 80, // Smaller than circle
+                                      width: 80, // Smaller than circle
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(10),
+                                      ),
+                                      child: Image.asset(
+                                        products.image,
+                                        fit: BoxFit
+                                            .contain, // Ensures it stays within bounds
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text(
+                                  products.name,
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "\$${products.price.toStringAsFixed(2)}",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 20),
+                                      ),
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        decoration: BoxDecoration(
+                                          color: Colors.pink,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Center(
+                                          child: FaIcon(
+                                            FontAwesomeIcons.plus,
+                                            color: Colors.white,
+                                            size: 16,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        );
+                      }))
         ],
       ),
+      
     );
   }
 }

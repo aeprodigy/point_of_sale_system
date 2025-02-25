@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:point_on_sale_system/views/pages/home_page.dart';
 import 'package:point_on_sale_system/views/screens/home_screen.dart';
 import 'package:point_on_sale_system/views/widgets/button_widget.dart';
 
@@ -214,7 +215,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => HomeScreen(),
+                        builder: (context) => HomePage(),
                       ),
                     );
                   },
