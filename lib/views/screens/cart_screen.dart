@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:point_on_sale_system/providers/cart_provider.dart';
+import 'package:point_on_sale_system/views/pages/home_page.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -10,9 +11,11 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     final cartItem = cartProvider.cartItems;
+
     return Scaffold(
+      backgroundColor: Colors.white,
       body: cartItem.isEmpty
-          ? Center(child: Text('Cart Is Empty'))
+          ? Center(child: Text('Cart Is Empty', style: TextStyle(fontSize: 18)))
           : Column(
               children: [
                 SizedBox(height: 70),
@@ -21,23 +24,30 @@ class CartScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          FaIcon(FontAwesomeIcons.angleLeft),
-                          SizedBox(width: 10),
-                          Text(
-                            'Checkout',
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.w500),
-                          ),
-                        ],
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            FaIcon(FontAwesomeIcons.angleLeft, size: 18),
+                            SizedBox(width: 10),
+                            Text(
+                              'Checkout',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
                       ),
                       IconButton(
                         onPressed: () {
-                          cartProvider
-                              .removeFromCart(cartProvider.cartItems.last);
+                          cartProvider.clear();
                         },
-                        icon: FaIcon(FontAwesomeIcons.trashCan),
+                        icon: FaIcon(FontAwesomeIcons.trashCan, size: 18),
                       ),
                     ],
                   ),
@@ -46,111 +56,145 @@ class CartScreen extends StatelessWidget {
                 Expanded(
                   child: ListView.builder(
                     itemCount: cartItem.length,
+                    padding: EdgeInsets.symmetric(horizontal: 18),
                     itemBuilder: (context, index) {
                       final items = cartItem[index];
                       return Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 18.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Left side: Image & Name + Quantity Controls
-                            Row(
-                              children: [
-                                Image.asset(
-                                  items.image,
-                                  width: 60,
-                                  height: 60,
-                                  fit: BoxFit.cover,
-                                ),
-                                SizedBox(width: 15),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      items.name,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18),
-                                    ),
-                                    SizedBox(height: 10),
-                                    Row(
-                                      children: [
-                                        Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            color: Colors.pink,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Center(
-                                            child: FaIcon(
-                                              FontAwesomeIcons.subtract,
-                                              color: Colors.white,
-                                              size: 16,
+                        padding: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Container(
+                          padding: EdgeInsets.all(12),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.1),
+                                blurRadius: 10,
+                                spreadRadius: 2,
+                                offset: Offset(0, 5),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Image & Product Name + Quantity Controls
+                              Row(
+                                children: [
+                                  Image.asset(
+                                    items.image,
+                                    width: 60,
+                                    height: 60,
+                                    fit: BoxFit.cover,
+                                  ),
+                                  SizedBox(width: 15),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        items.name,
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 18),
+                                      ),
+                                      SizedBox(height: 10),
+                                      Row(
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () {
+                                              cartProvider
+                                                  .decreaseQuantity(items);
+                                            },
+                                            child: Container(
+                                              height: 30,
+                                              width: 30,
+                                              decoration: BoxDecoration(
+                                                color: Colors.pink,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.subtract,
+                                                  color: Colors.white,
+                                                  size: 16,
+                                                ),
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Text(
-                                          '0',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w600),
-                                        ),
-                                        SizedBox(width: 10),
-                                        Container(
-                                          height: 30,
-                                          width: 30,
-                                          decoration: BoxDecoration(
-                                            color: Colors.pink,
-                                            shape: BoxShape.circle,
+                                          SizedBox(width: 10),
+                                          Text(
+                                            '${items.quantity}',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 16),
                                           ),
-                                          child: Center(
-                                            child: FaIcon(
-                                              FontAwesomeIcons.plus,
-                                              color: Colors.white,
-                                              size: 16,
+                                          SizedBox(width: 10),
+                                          GestureDetector(
+                                            onTap: () {
+                                              cartProvider
+                                                  .increaseQuantity(items);
+                                            },
+                                            child: Container(
+                                              height: 30,
+                                              width: 30,
+                                              decoration: BoxDecoration(
+                                                color: Colors.pink,
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: Center(
+                                                child: FaIcon(
+                                                  FontAwesomeIcons.plus,
+                                                  color: Colors.white,
+                                                  size: 16,
+                                                ),
+                                              ),
                                             ),
                                           ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              // Price & Delete Icon
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  Text(
+                                    "\$${items.price.toStringAsFixed(2)}",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 18),
+                                  ),
+                                  SizedBox(height: 10),
+                                  GestureDetector(
+                                    onTap: () {
+                                      cartProvider.removeFromCart(items);
+                                    },
+                                    child: Container(
+                                      height: 28,
+                                      width: 28,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        border: Border.all(
+                                          color: Colors.grey[500]!,
+                                          width: 2.5,
                                         ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            // Right side: Price & Delete Icon
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Text(
-                                  "\$${items.price.toStringAsFixed(2)}",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18),
-                                ),
-                                SizedBox(height: 10),
-                                Container(
-                                  height: 28,
-                                  width: 28,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: Colors.grey[500]!,
-                                      width: 2.5,
+                                      ),
+                                      child: Center(
+                                        child: FaIcon(
+                                          FontAwesomeIcons.close,
+                                          color: Colors.grey[500],
+                                          size: 16,
+                                        ),
+                                      ),
                                     ),
                                   ),
-                                  child: Center(
-                                    child: FaIcon(
-                                      FontAwesomeIcons.close,
-                                      color: Colors.grey[500],
-                                      size: 16,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -158,6 +202,51 @@ class CartScreen extends StatelessWidget {
                 ),
               ],
             ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
+        child: Container(
+          height: 50,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Colors.pink,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "\$ ${cartProvider.totalPrice.toStringAsFixed(2)}",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Checkout',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w300,
+                      ),
+                    ),
+                    SizedBox(width: 12),
+                    FaIcon(
+                      FontAwesomeIcons.angleRight,
+                      color: Colors.white,
+                      size: 18,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
