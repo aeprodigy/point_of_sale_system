@@ -127,7 +127,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           Text(
                             category['label'],
                             style: TextStyle(
-                              fontWeight: FontWeight.w400,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 10,
                               color:
                                   isSelected ? Colors.white : Colors.grey[900],
                             ),
@@ -261,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Colors.black,
-                                  fontWeight: FontWeight.w400,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 12,
                                 ),
                               ),
