@@ -36,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
             (product.name.toLowerCase().contains(_searchQuery.toLowerCase())))
         .toList();
 
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -217,12 +216,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     (item) =>
                                                         item.id == product.id,
                                                     orElse: () => ProductModel(
-                                                        id: 0,
-                                                        name: '',
-                                                        price: 0.0,
-                                                        quantity: 0,
-                                                        image: '', 
-                                                        category: '',),
+                                                      id: 0,
+                                                      name: '',
+                                                      price: 0.0,
+                                                      quantity: 0,
+                                                      image: '',
+                                                      category: '',
+                                                    ),
                                                   )
                                                   .quantity;
 
@@ -262,7 +262,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w400,
-                                  fontSize: 20,
+                                  fontSize: 12,
                                 ),
                               ),
 
