@@ -96,7 +96,7 @@ class CartScreen extends StatelessWidget {
                                         items.name,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 18),
+                                            fontSize: 12),
                                       ),
                                       SizedBox(height: 10),
                                       Row(
@@ -127,7 +127,7 @@ class CartScreen extends StatelessWidget {
                                             '${items.quantity}',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.w600,
-                                                fontSize: 16),
+                                                fontSize: 12),
                                           ),
                                           SizedBox(width: 10),
                                           GestureDetector(
@@ -165,7 +165,7 @@ class CartScreen extends StatelessWidget {
                                     "\$${items.price.toStringAsFixed(2)}",
                                     style: TextStyle(
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 18),
+                                        fontSize: 12),
                                   ),
                                   SizedBox(height: 10),
                                   GestureDetector(
