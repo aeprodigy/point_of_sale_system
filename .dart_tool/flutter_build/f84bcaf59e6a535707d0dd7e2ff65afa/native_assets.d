@@ -1,0 +1,1 @@
+ C:\\Users\\Administrator\\Desktop\\Career\ Projetcs\\portfolio_projects\\point_on_sale_system\\.dart_tool\\flutter_build\\f84bcaf59e6a535707d0dd7e2ff65afa\\native_assets.yaml: 
