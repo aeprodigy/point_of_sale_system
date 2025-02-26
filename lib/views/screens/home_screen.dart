@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 final isSelected = selectedCategory == category['label'];
 
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: GestureDetector(
                     onTap: () {
                       setState(() {
