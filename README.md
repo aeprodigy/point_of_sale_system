@@ -1,16 +1,6 @@
-# point_on_sale_system
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<h1>Hi</h1>
+<h2>To get this project you can follow the following commands<h2>
+<ol>
+<li>Run this command: git clone https://github.com/aeprodigy/point_of_sale_system</li>
+<li>run this command: flutter pub get</li>
+</ol>
