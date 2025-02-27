@@ -6,8 +6,6 @@ import 'package:point_on_sale_system/views/screens/home_screen.dart';
 import 'package:point_on_sale_system/views/screens/invoice_screen.dart';
 import 'package:provider/provider.dart';
 
-import 'package:pdf/widgets.dart' as pw;
-
 class HomePage extends StatefulWidget {
   HomePage({super.key});
 
@@ -17,12 +15,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
-  final pdf = pw.Document();
   // Tracks the selected tab
   final List<Widget> _screens = [
     HomeScreen(),
     CartScreen(),
-   // InvoiceScreen(pdf:pdf)
   ];
 
   // Function to handle tab switching

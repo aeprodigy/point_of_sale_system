@@ -25,3 +25,4 @@ com.example.point_on_sale_system.app-resValues-23 C:\Users\Administrator\Desktop
 com.example.point_on_sale_system.app-packageDebugResources-24 C:\Users\Administrator\Desktop\Career Projetcs\portfolio_projects\point_on_sale_system\build\app\intermediates\incremental\debug\packageDebugResources\merged.dir
 com.example.point_on_sale_system.app-packageDebugResources-25 C:\Users\Administrator\Desktop\Career Projetcs\portfolio_projects\point_on_sale_system\build\app\intermediates\incremental\debug\packageDebugResources\stripped.dir
 com.example.point_on_sale_system.app-merged_res-26 C:\Users\Administrator\Desktop\Career Projetcs\portfolio_projects\point_on_sale_system\build\app\intermediates\merged_res\debug
+com.example.point_on_sale_system.app-packaged_res-27 C:\Users\Administrator\Desktop\Career Projetcs\portfolio_projects\point_on_sale_system\build\printing\intermediates\packaged_res\debug
