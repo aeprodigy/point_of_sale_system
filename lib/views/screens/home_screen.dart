@@ -160,153 +160,159 @@ class _HomeScreenState extends State<HomeScreen> {
 
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: Card(
-                          color: Colors.white,
-                          elevation: 5,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            children: [
-                              const SizedBox(height: 10),
-
-                              // Product Image with Cart Badge
-                              GestureDetector(
-                                onTap: () {
-                                  // Handle product click
-                                },
-                                child: Stack(
-                                  alignment: Alignment.center,
-                                  children: [
-                                    Container(
-                                      width: 100,
-                                      height: 100,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        shape: BoxShape.circle,
-                                        border: Border.all(
-                                          color: cartProvider.cartItems.any(
-                                                  (item) =>
-                                                      item.id == product.id)
-                                              ? Colors.pink[100]!
-                                              : Colors.grey[100]!,
-                                          width: 10.0,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 80,
-                                      width: 80,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: Image.asset(
-                                        product.image,
-                                        fit: BoxFit.contain,
-                                      ),
-                                    ),
-                                    Positioned(
-                                      right: 1,
-                                      top: -1,
-                                      child: Consumer<CartProvider>(
-                                        builder:
-                                            (context, cartProvider, child) {
-                                          int productQuantity =
-                                              cartProvider.cartItems
-                                                  .firstWhere(
-                                                    (item) =>
-                                                        item.id == product.id,
-                                                    orElse: () => ProductModel(
-                                                      id: 0,
-                                                      name: '',
-                                                      price: 0.0,
-                                                      quantity: 0,
-                                                      image: '',
-                                                      category: '',
-                                                    ),
-                                                  )
-                                                  .quantity;
-
-                                          return productQuantity > 0
-                                              ? Container(
-                                                  padding:
-                                                      const EdgeInsets.all(6),
-                                                  decoration:
-                                                      const BoxDecoration(
-                                                    color: Colors.pink,
-                                                    shape: BoxShape.circle,
-                                                  ),
-                                                  child: Text(
-                                                    productQuantity.toString(),
-                                                    style: const TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                )
-                                              : const SizedBox();
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-
-                              const SizedBox(height: 10),
-
-                              // Product Name
-                              Text(
-                                product.name,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 12,
-                                ),
-                              ),
-
-                              const SizedBox(height: 30),
-
-                              // Product Price and Add to Cart Button
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "\$${product.price.toStringAsFixed(2)}",
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 20),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        cartProvider.addToCart(product);
-                                      },
-                                      child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        decoration: const BoxDecoration(
-                                          color: Colors.pink,
+                        child: GestureDetector(
+                          onTap: (){
+                            cartProvider.addToCart(product);
+                          },
+                          child: Card(
+                            color: Colors.white,
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 10),
+                          
+                                // Product Image with Cart Badge
+                                GestureDetector(
+                                  onTap: () {
+                                    // Handle product click
+                                    cartProvider.addToCart(product);
+                                  },
+                                  child: Stack(
+                                    alignment: Alignment.center,
+                                    children: [
+                                      Container(
+                                        width: 100,
+                                        height: 100,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
                                           shape: BoxShape.circle,
-                                        ),
-                                        child: const Center(
-                                          child: FaIcon(
-                                            FontAwesomeIcons.plus,
-                                            color: Colors.white,
-                                            size: 16,
+                                          border: Border.all(
+                                            color: cartProvider.cartItems.any(
+                                                    (item) =>
+                                                        item.id == product.id)
+                                                ? Colors.pink[100]!
+                                                : Colors.grey[100]!,
+                                            width: 10.0,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ],
+                                      Container(
+                                        height: 80,
+                                        width: 80,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(10),
+                                        ),
+                                        child: Image.asset(
+                                          product.image,
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                      Positioned(
+                                        right: 1,
+                                        top: -1,
+                                        child: Consumer<CartProvider>(
+                                          builder:
+                                              (context, cartProvider, child) {
+                                            int productQuantity =
+                                                cartProvider.cartItems
+                                                    .firstWhere(
+                                                      (item) =>
+                                                          item.id == product.id,
+                                                      orElse: () => ProductModel(
+                                                        id: 0,
+                                                        name: '',
+                                                        price: 0.0,
+                                                        quantity: 0,
+                                                        image: '',
+                                                        category: '',
+                                                      ),
+                                                    )
+                                                    .quantity;
+                          
+                                            return productQuantity > 0
+                                                ? Container(
+                                                    padding:
+                                                        const EdgeInsets.all(6),
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      color: Colors.pink,
+                                                      shape: BoxShape.circle,
+                                                    ),
+                                                    child: Text(
+                                                      productQuantity.toString(),
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  )
+                                                : const SizedBox();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              )
-                            ],
+                          
+                                const SizedBox(height: 10),
+                          
+                                // Product Name
+                                Text(
+                                  product.name,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                          
+                                const SizedBox(height: 30),
+                          
+                                // Product Price and Add to Cart Button
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "\$${product.price.toStringAsFixed(2)}",
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w400,
+                                            fontSize: 20),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          cartProvider.addToCart(product);
+                                        },
+                                        child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          decoration: const BoxDecoration(
+                                            color: Colors.pink,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: const Center(
+                                            child: FaIcon(
+                                              FontAwesomeIcons.plus,
+                                              color: Colors.white,
+                                              size: 16,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart';
+import 'package:point_on_sale_system/views/screens/check_out_screen.dart';
 import 'package:point_on_sale_system/views/screens/invoice_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +43,7 @@ class OrderDetailsScreen extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => HomePage()),
+                        MaterialPageRoute(builder: (context) => CheckOutScreen()),
                       );
                     },
                     child: Row(
