@@ -18,6 +18,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   Widget build(BuildContext context) {
     final cartProvider = Provider.of<CartProvider>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           //Payment
@@ -65,7 +66,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 width: 10,
               ),
               paymentOption(
-                'Credit Card',
+                'Cash',
                 Icons.money,
                 'Cash',
               ),
@@ -73,7 +74,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                 width: 10,
               ),
               paymentOption(
-                'Credit Card',
+                'Scanner',
                 Icons.qr_code,
                 'Scan Card',
               ),
@@ -82,7 +83,109 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           SizedBox(
             height: 20,
           ),
-          
+          Row(
+            children: [
+              //payment Options containers
+              Container(
+                height: 80,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(25),
+                      blurRadius: 5,
+                      spreadRadius: 3,
+                      offset: const Offset(4, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    'assets/payments/mastercard.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+
+              Container(
+                height: 80,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(25),
+                      blurRadius: 5,
+                      spreadRadius: 3,
+                      offset: const Offset(4, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    'assets/payments/visa.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+
+              Container(
+                height: 80,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(25),
+                      blurRadius: 5,
+                      spreadRadius: 3,
+                      offset: const Offset(4, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    'assets/payments/american_express.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+
+
+              Container(
+                height: 80,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(5),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withAlpha(25),
+                      blurRadius: 5,
+                      spreadRadius: 3,
+                      offset: const Offset(4, 2),
+                    ),
+                  ],
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Image.asset(
+                    'assets/payments/discover.png',
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
+
+
+            ],
+          )
         ],
       ),
 
@@ -148,7 +251,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         width: 100,
         decoration: BoxDecoration(
           color: selectedMethod == method ? Colors.pink : Colors.grey[500],
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(5),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -160,6 +263,58 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
                     color: Colors.white, fontWeight: FontWeight.w600)),
           ],
         ),
+      ),
+    );
+  }
+
+  // Payment Fields
+  Widget buildPaymentFields() {
+    switch (selectedMethod) {
+      case "Credit Card":
+        return creditCardForm();
+      case "Cash":
+        return cashForm();
+      case "Scanner":
+        return scannerForm();
+      default:
+        return Center(
+            child: Text("Select a payment method",
+                style: TextStyle(fontSize: 18)));
+    }
+  }
+
+  // Credit Card Form
+  Widget creditCardForm() {
+    return Padding(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        children: [
+          TextField(decoration: InputDecoration(labelText: "Card Number")),
+          TextField(decoration: InputDecoration(labelText: "Expiry Date")),
+          TextField(decoration: InputDecoration(labelText: "CVV")),
+        ],
+      ),
+    );
+  }
+
+  // Cash Payment Message
+  Widget cashForm() {
+    return Center(
+      child: Text("Please pay in cash at the counter.",
+          style: TextStyle(fontSize: 18)),
+    );
+  }
+
+  // Scanner Form
+  Widget scannerForm() {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.qr_code_scanner, size: 80, color: Colors.black),
+          SizedBox(height: 10),
+          Text("Scan QR Code to proceed", style: TextStyle(fontSize: 18)),
+        ],
       ),
     );
   }
