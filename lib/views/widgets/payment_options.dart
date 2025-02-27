@@ -14,22 +14,22 @@ class PaymentOptionsRow extends StatelessWidget {
       builder: (context, constraints) {
         double screenWidth = constraints.maxWidth;
 
-        // Adjust container size dynamically based on screen width
-        double containerWidth =
-            screenWidth > 600 ? 120 : 80; // Larger on tablets
-        double containerHeight = screenWidth > 600 ? 100 : 70;
+        double containerWidth = screenWidth / paymentImages.length - 20;
+        double containerHeight = containerWidth * 0.6;
 
-        return Wrap(
-          alignment: WrapAlignment.center,
-          spacing: 10,
-          runSpacing: 10,
-          children: paymentImages.map((imagePath) {
-            return PaymentOptionCard(
-              imagePath: imagePath,
-              width: containerWidth,
-              height: containerHeight,
-            );
-          }).toList(),
+        return Center(
+          child: Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 10,
+            runSpacing: 10,
+            children: paymentImages.map((imagePath) {
+              return PaymentOptionCard(
+                imagePath: imagePath,
+                width: containerWidth.clamp(60, 120),
+                height: containerHeight.clamp(40, 80),
+              );
+            }).toList(),
+          ),
         );
       },
     );

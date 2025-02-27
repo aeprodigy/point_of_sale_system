@@ -24,87 +24,94 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Column(
-        children: [
-          SizedBox(height: 70),
-          Padding(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          // Wrap content in a scrollable view
+          child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => CartScreen()),
-                    );
-                  },
-                  child: Row(
-                    children: [
-                      FaIcon(FontAwesomeIcons.angleLeft, size: 18),
-                      SizedBox(width: 10),
-                      Text(
-                        'Payment',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w600),
+                SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CartScreen()),
+                        );
+                      },
+                      child: Row(
+                        children: [
+                          FaIcon(FontAwesomeIcons.angleLeft, size: 18),
+                          SizedBox(width: 10),
+                          Text(
+                            'Payment',
+                            style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
+                SizedBox(height: 30),
+
+                // Payment options row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    PaymentOption(
+                      title: 'Card',
+                      icon: FontAwesomeIcons.creditCard,
+                      method: 'Card',
+                      selectedMethod: selectedMethod,
+                      onTap: () {
+                        setState(() {
+                          selectedMethod = 'Card';
+                        });
+                      },
+                    ),
+                    PaymentOption(
+                      title: 'Cash',
+                      icon: Icons.money,
+                      method: 'Cash',
+                      selectedMethod: selectedMethod,
+                      onTap: () {
+                        setState(() {
+                          selectedMethod = 'Cash';
+                        });
+                      },
+                    ),
+                    PaymentOption(
+                      title: 'Scanner',
+                      icon: Icons.qr_code,
+                      method: 'Scanner',
+                      selectedMethod: selectedMethod,
+                      onTap: () {
+                        setState(() {
+                          selectedMethod = 'Scanner';
+                        });
+                      },
+                    ),
+                  ],
+                ),
+                SizedBox(height: 30),
+
+                if (selectedMethod == "Card") PaymentOptionsRow(),
+                SizedBox(height: 20),
+
+                PaymentFields(selectedMethod: selectedMethod),
+
+                SizedBox(height: 40), // Add spacing before bottom bar
               ],
             ),
           ),
-          SizedBox(height: 30),
-
-          // Payment options row
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              PaymentOption(
-                title: 'Card',
-                icon: FontAwesomeIcons.creditCard,
-                method: 'Card',
-                selectedMethod: selectedMethod,
-                onTap: () {
-                  setState(() {
-                    selectedMethod = 'Card';
-                  });
-                },
-              ),
-              PaymentOption(
-                title: 'Cash',
-                icon: Icons.money,
-                method: 'Cash',
-                selectedMethod: selectedMethod,
-                onTap: () {
-                  setState(() {
-                    selectedMethod = 'Cash';
-                  });
-                },
-              ),
-              PaymentOption(
-                title: 'Scanner',
-                icon: Icons.qr_code,
-                method: 'Scanner',
-                selectedMethod: selectedMethod,
-                onTap: () {
-                  setState(() {
-                    selectedMethod = 'Scanner';
-                  });
-                },
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 30,
-          ),
-          // Show payment input fields only when Credit Card is selected
-          if (selectedMethod == "Card") PaymentOptionsRow(),
-          SizedBox(height: 20),
-
-          // Payment input fields based on selected method
-          PaymentFields(selectedMethod: selectedMethod),
-        ],
+        ),
       ),
 
       // Bottom navigation checkout button

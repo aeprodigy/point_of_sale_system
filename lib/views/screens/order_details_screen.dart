@@ -29,119 +29,31 @@ class OrderDetailsScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.grey[200],
-      body: Column(
-        children: [
-          const SizedBox(height: 70),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomePage()),
-                    );
-                  },
-                  child: Row(
-                    children: const [
-                      FaIcon(FontAwesomeIcons.angleLeft, size: 18),
-                      SizedBox(width: 10),
-                      Text(
-                        'Order Details',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w400),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 30),
-
-          // Success payment card
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Container(
-              height: 600,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: SingleChildScrollView(
+        // Enables scrolling
+        child: Column(
+          children: [
+            const SizedBox(height: 70),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 18.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const SizedBox(height: 20),
-
-                  // Success icon
-                  Center(
-                    child: Container(
-                      width: 90,
-                      height: 90,
-                      decoration: BoxDecoration(
-                        color: Colors.pink[600],
-                        shape: BoxShape.circle,
-                      ),
-                      child: const Center(
-                        child: FaIcon(
-                          FontAwesomeIcons.check,
-                          color: Colors.white,
-                          size: 70,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-
-                  // Payment success message
-                  Center(
-                    child: Text(
-                      'Payment Success',
-                      style: TextStyle(
-                        color: Colors.grey[700],
-                        fontSize: 23,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-
-                  _buildDetailRow('Payment Method', paymentMethod),
-                  _buildDetailRow(
-                      'Total Price', '\$${totalPrice.toStringAsFixed(2)}'),
-                  _buildDetailRow(
-                      'Transaction Time', '$formattedDate, $formattedTime'),
-
-                  // Buttons
-                  const SizedBox(height: 40),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 80.0),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    },
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        _buildButton(
-                          label: 'Done',
-                          color: Colors.pink,
-                          textColor: Colors.white,
-                          onTap: () {
-                            Provider.of<CartProvider>(context, listen: false)
-                                .clear();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()),
-                            );
-                          },
-                        ),
-                        _buildButton(
-                          label: 'Print',
-                          color: Colors.white,
-                          textColor: Colors.pink,
-                          borderColor: Colors.pink,
-                          onTap: () => _generatePDF(context),
+                      children: const [
+                        FaIcon(FontAwesomeIcons.angleLeft, size: 18),
+                        SizedBox(width: 10),
+                        Text(
+                          'Order Details',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w400),
                         ),
                       ],
                     ),
@@ -149,8 +61,104 @@ class OrderDetailsScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ),
-        ],
+            const SizedBox(height: 30),
+
+            // Success payment card
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Container(
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+
+                      // Success icon
+                      Center(
+                        child: Container(
+                          width: 90,
+                          height: 90,
+                          decoration: BoxDecoration(
+                            color: Colors.pink[600],
+                            shape: BoxShape.circle,
+                          ),
+                          child: const Center(
+                            child: FaIcon(
+                              FontAwesomeIcons.check,
+                              color: Colors.white,
+                              size: 70,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Payment success message
+                      Center(
+                        child: Text(
+                          'Payment Success',
+                          style: TextStyle(
+                            color: Colors.grey[700],
+                            fontSize: 23,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 30),
+
+                      _buildDetailRow('Payment Method', paymentMethod),
+                      _buildDetailRow(
+                          'Total Price', '\$${totalPrice.toStringAsFixed(2)}'),
+                      _buildDetailRow(
+                          'Transaction Time', '$formattedDate, $formattedTime'),
+
+                      // Buttons
+                      const SizedBox(height: 40),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            _buildButton(
+                              label: 'Done',
+                              color: Colors.pink,
+                              textColor: Colors.white,
+                              onTap: () {
+                                Provider.of<CartProvider>(context,
+                                        listen: false)
+                                    .clear();
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => HomePage()),
+                                );
+                              },
+                            ),
+                            _buildButton(
+                              label: 'Print',
+                              color: Colors.white,
+                              textColor: Colors.pink,
+                              borderColor: Colors.pink,
+                              onTap: () => _generatePDF(context),
+                            ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                          height: 20), // Added spacing to prevent cut-off
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
