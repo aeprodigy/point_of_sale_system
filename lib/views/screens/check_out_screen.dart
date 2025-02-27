@@ -13,7 +13,7 @@ class CheckOutScreen extends StatefulWidget {
 }
 
 class _CheckOutScreenState extends State<CheckOutScreen> {
-  String selectedMethod = "None";
+  String selectedMethod = "Credit Card";
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +84,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
           SizedBox(
             height: 20,
           ),
-          PaymentOptionsRow(),
+            // Show payment input fields only when Credit Card is selected
+          if (selectedMethod == "Credit Card") PaymentOptionsRow(),
+          
 
           //Payments input fields
           buildPaymentFields(),
