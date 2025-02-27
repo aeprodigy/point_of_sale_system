@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:point_on_sale_system/providers/cart_provider.dart';
 import 'package:point_on_sale_system/views/pages/home_page.dart';
+import 'package:point_on_sale_system/views/screens/check_out_screen.dart';
 import 'package:provider/provider.dart';
 
 class CartScreen extends StatelessWidget {
@@ -204,45 +205,55 @@ class CartScreen extends StatelessWidget {
             ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
-        child: Container(
-          height: 50,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            color: Colors.pink,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "\$ ${cartProvider.totalPrice.toStringAsFixed(2)}",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Checkout',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w300,
-                      ),
-                    ),
-                    SizedBox(width: 12),
-                    FaIcon(
-                      FontAwesomeIcons.angleRight,
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CheckOutScreen(),
+              ),
+            );
+          },
+          child: Container(
+            height: 50,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              color: Colors.pink,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "\$ ${cartProvider.totalPrice.toStringAsFixed(2)}",
+                    style: TextStyle(
                       color: Colors.white,
-                      size: 18,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300,
                     ),
-                  ],
-                )
-              ],
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Checkout',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w300,
+                        ),
+                      ),
+                      SizedBox(width: 12),
+                      FaIcon(
+                        FontAwesomeIcons.angleRight,
+                        color: Colors.white,
+                        size: 18,
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ),

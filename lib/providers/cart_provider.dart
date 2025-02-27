@@ -57,6 +57,7 @@ class CartProvider with ChangeNotifier {
   }
 
   void clear() {
+    ProductModel product;
     _cartItems.clear();
     _addedProductIds.clear(); // Reset tracking on clear
     notifyListeners();
