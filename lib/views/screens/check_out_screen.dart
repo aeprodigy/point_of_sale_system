@@ -107,7 +107,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
                 PaymentFields(selectedMethod: selectedMethod),
 
-                SizedBox(height: 40), // Add spacing before bottom bar
+                SizedBox(height: 40), 
               ],
             ),
           ),
@@ -119,7 +119,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
         child: GestureDetector(
           onTap: () {
-            DateTime orderTime = DateTime.now(); // Get current time
+            DateTime orderTime = DateTime.now(); // here we get the current time
             Navigator.push(
               context,
               MaterialPageRoute(

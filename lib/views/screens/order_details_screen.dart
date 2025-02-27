@@ -256,11 +256,17 @@ class OrderDetailsScreen extends StatelessWidget {
     );
 
     // Navigate to the Invoice Screen with PDF
+   // Navigate to the Invoice Screen with required details
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => InvoiceScreen(pdf: pdf),
+        builder: (context) => InvoiceScreen(
+          totalPrice: totalPrice,
+          orderTime: orderTime,
+          paymentMethod: paymentMethod,
+        ),
       ),
     );
+
   }
 }

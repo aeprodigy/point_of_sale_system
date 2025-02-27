@@ -58,7 +58,7 @@ class CartProvider with ChangeNotifier {
 
   void clear() {
      for (var item in _cartItems) {
-      item.quantity = 1; // Reset quantity for each product
+      item.quantity = 1;
     }
     _cartItems.clear();
     _addedProductIds.clear(); 
@@ -69,4 +69,9 @@ class CartProvider with ChangeNotifier {
     return _cartItems.fold(
         0, (sum, item) => sum + (item.price * item.quantity));
   }
+
+ int get totalItems {
+    return _cartItems.fold(0, (sum, item) => sum + item.quantity);
+  }
+
 }

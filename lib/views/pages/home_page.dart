@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:point_on_sale_system/providers/cart_provider.dart';
 import 'package:point_on_sale_system/views/screens/cart_screen.dart';
 import 'package:point_on_sale_system/views/screens/home_screen.dart';
+import 'package:point_on_sale_system/views/screens/invoice_bottom_screen.dart';
+import 'package:point_on_sale_system/views/screens/menu_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +20,8 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> _screens = [
     HomeScreen(),
     CartScreen(),
+    InvoiceBottomScreen(),
+    MenuScreen(),
   ];
 
   // Function to handle tab switching
@@ -36,26 +40,27 @@ class _HomePageState extends State<HomePage> {
           : BottomNavigationBar(
               elevation: 5,
               backgroundColor: Colors.white,
-              currentIndex: _selectedIndex, // Highlight selected tab
-              onTap: _onItemTapped, // Handle tab switch
-              type: BottomNavigationBarType.fixed, // Keeps all icons visible
+              currentIndex: _selectedIndex, 
+              onTap: _onItemTapped, // Handle tab switch theze tabs
+              type: BottomNavigationBarType.fixed, 
               selectedIconTheme:
-                  const IconThemeData(color: Colors.pink), // Pink icon
+                  const IconThemeData(color: Colors.pink), 
               unselectedIconTheme: const IconThemeData(
-                  color: Colors.grey), // Grey for unselected
+                  color: Colors.grey), 
 
               selectedLabelStyle: const TextStyle(
                   color: Colors.black,
-                  fontWeight: FontWeight.w400), // Black text
+                  fontWeight: FontWeight.w400), 
               unselectedLabelStyle: const TextStyle(color: Colors.grey),
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(Icons.home),
                   label: 'Home',
+                  
                 ),
                 BottomNavigationBarItem(
                   icon: Stack(
-                    clipBehavior: Clip.none, // Ensures the badge is not clipped
+                    clipBehavior: Clip.none, 
                     children: [
                       const FaIcon(FontAwesomeIcons.cartShopping), // Cart icon
 

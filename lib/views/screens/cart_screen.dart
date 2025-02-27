@@ -16,7 +16,56 @@ class CartScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: cartItem.isEmpty
-          ? Center(child: Text('Cart Is Empty', style: TextStyle(fontSize: 18)))
+          ? Column(
+              children: [
+                SizedBox(height: 70),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 18.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        },
+                        child: Row(
+                          children: [
+                            FaIcon(FontAwesomeIcons.angleLeft, size: 18),
+                            SizedBox(width: 10),
+                            Text(
+                              'Checkout',
+                              style: TextStyle(
+                                  fontSize: 20, fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 200,
+                    ),
+                    Center(
+                      child: Text(
+                        'Cart Is Empty!',
+                        style: TextStyle(
+                          color: Colors.red,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 30,
+                        ),
+                      ),
+                    )
+                  ],
+                )
+              ],
+            )
           : Column(
               children: [
                 SizedBox(height: 70),
@@ -79,7 +128,7 @@ class CartScreen extends StatelessWidget {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              // Image & Product Name + Quantity Controls
+                              // Image & Product Name and my Quantity Controls
                               Row(
                                 children: [
                                   Image.asset(
@@ -158,7 +207,7 @@ class CartScreen extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              // Price & Delete Icon
+                              // Price and thz Delete Icon
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -203,16 +252,49 @@ class CartScreen extends StatelessWidget {
                 ),
               ],
             ),
+
+      //bottom navbar to contain my button
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10),
         child: GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CheckOutScreen(),
-              ),
-            );
+            if (cartProvider.totalPrice > 0) {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => CheckOutScreen(),
+                ),
+              );
+            }else{
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        'Your cart is empty! Add items to proceed.',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 8),
+                      LinearProgressIndicator(
+                        backgroundColor: Colors.white24,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    ],
+                  ),
+                  backgroundColor: Colors.pink,
+                  behavior: SnackBarBehavior.floating, 
+                  margin: EdgeInsets.all(16),
+                  duration: Duration(seconds: 3), 
+                ),
+              );
+
+            }
           },
           child: Container(
             height: 50,
