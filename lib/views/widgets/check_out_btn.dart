@@ -7,11 +7,14 @@ class CheckOutBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: Colors.pink
+    return GestureDetector(
+      onTap: ontap,
+      child: Container(
+        height: 50,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: Colors.pink
+        ),
       ),
     );
   }
