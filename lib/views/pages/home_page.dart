@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:point_on_sale_system/providers/cart_provider.dart';
 import 'package:point_on_sale_system/views/screens/cart_screen.dart';
 import 'package:point_on_sale_system/views/screens/home_screen.dart';
-import 'package:point_on_sale_system/views/screens/invoice_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

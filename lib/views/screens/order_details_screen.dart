@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:point_on_sale_system/providers/cart_provider.dart';
 import 'package:point_on_sale_system/views/pages/home_page.dart';
 import 'package:intl/intl.dart';
-import 'package:printing/printing.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:flutter/services.dart';
