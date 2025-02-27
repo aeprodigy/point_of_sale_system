@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:point_on_sale_system/providers/cart_provider.dart';
 import 'package:point_on_sale_system/views/screens/cart_screen.dart';
+import 'package:point_on_sale_system/views/widgets/payment_options_row.dart';
 import 'package:provider/provider.dart';
 
 class CheckOutScreen extends StatefulWidget {
@@ -76,116 +77,17 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               paymentOption(
                 'Scanner',
                 Icons.qr_code,
-                'Scan Card',
+                'Scanner',
               ),
             ],
           ),
           SizedBox(
             height: 20,
           ),
-          Row(
-            children: [
-              //payment Options containers
-              Container(
-                height: 80,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(25),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                      offset: const Offset(4, 2),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.asset(
-                    'assets/payments/mastercard.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
+          PaymentOptionsRow(),
 
-              Container(
-                height: 80,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(25),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                      offset: const Offset(4, 2),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.asset(
-                    'assets/payments/visa.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-
-              Container(
-                height: 80,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(25),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                      offset: const Offset(4, 2),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.asset(
-                    'assets/payments/american_express.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-
-
-              Container(
-                height: 80,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(5),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withAlpha(25),
-                      blurRadius: 5,
-                      spreadRadius: 3,
-                      offset: const Offset(4, 2),
-                    ),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Image.asset(
-                    'assets/payments/discover.png',
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-
-
-            ],
-          )
+          //Payments input fields
+          buildPaymentFields(),
         ],
       ),
 
@@ -283,15 +185,157 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
     }
   }
 
+  bool isChecked = false;
   // Credit Card Form
   Widget creditCardForm() {
     return Padding(
       padding: EdgeInsets.all(16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          TextField(decoration: InputDecoration(labelText: "Card Number")),
-          TextField(decoration: InputDecoration(labelText: "Expiry Date")),
-          TextField(decoration: InputDecoration(labelText: "CVV")),
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            'Cardholder Name',
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          TextField(
+            decoration: InputDecoration(
+              labelText: "Cardholder Name",
+              fillColor: Colors.grey[100],
+              filled: true,
+              hintStyle: TextStyle(color: Colors.grey[200]),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Text(
+            'Card Number',
+            style: TextStyle(fontWeight: FontWeight.w500),
+          ),
+          SizedBox(
+            height: 8,
+          ),
+          //card number
+          TextField(
+            decoration: InputDecoration(
+              labelText: "Card Number",
+              fillColor: Colors.grey[100],
+              filled: true,
+              hintStyle: TextStyle(color: Colors.grey[200]),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(5),
+                borderSide: BorderSide.none,
+              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+            ),
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Expiration Date',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        )),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "00/0000",
+                        fillColor: Colors.grey[100],
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[200]),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 25),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                width: 30,
+              ),
+              //cvv
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('CVV',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                        )),
+                    SizedBox(
+                      height: 8,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(
+                        labelText: "CVV",
+                        fillColor: Colors.grey[100],
+                        filled: true,
+                        hintStyle: TextStyle(color: Colors.grey[200]),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 16, horizontal: 25),
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            ],
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          //save credit card info
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Checkbox(
+                value: isChecked,
+                onChanged: (bool? newValue) {
+                  setState(() {
+                    isChecked = newValue!;
+                  });
+                },
+              ),
+              const Text(
+                "Save Credit Card Information",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
@@ -299,9 +343,22 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
   // Cash Payment Message
   Widget cashForm() {
-    return Center(
-      child: Text("Please pay in cash at the counter.",
-          style: TextStyle(fontSize: 18)),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          height: 40,
+        ),
+        Center(
+          child: Text(
+            "Please pay in cash at the counter.",
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -311,6 +368,9 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(
+            height: 50,
+          ),
           Icon(Icons.qr_code_scanner, size: 80, color: Colors.black),
           SizedBox(height: 10),
           Text("Scan QR Code to proceed", style: TextStyle(fontSize: 18)),
