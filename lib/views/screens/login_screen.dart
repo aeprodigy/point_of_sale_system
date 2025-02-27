@@ -147,7 +147,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 "Remember me",
                                 style: TextStyle(
                                   color: Colors.black,
-                                  fontSize: 12,
+                                  fontSize: 14,
                                 ),
                               ),
                             ],
@@ -161,7 +161,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               style: TextStyle(
                                 color: Colors.pink,
                                 decoration: TextDecoration.underline,
-                                fontSize: 12,
+                                fontSize: 14,
                               ),
                             ),
                           ),
