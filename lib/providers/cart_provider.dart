@@ -57,9 +57,11 @@ class CartProvider with ChangeNotifier {
   }
 
   void clear() {
-    ProductModel product;
+     for (var item in _cartItems) {
+      item.quantity = 1; // Reset quantity for each product
+    }
     _cartItems.clear();
-    _addedProductIds.clear(); // Reset tracking on clear
+    _addedProductIds.clear(); 
     notifyListeners();
   }
 
