@@ -1,5 +1,5 @@
 <h1>Hi</h1>
-<h2>To get this project you can follow the following commands<h2>
+<h2>To get this project you can Run the following commands<h2>
 <ol>
 <li>Run this command: git clone https://github.com/aeprodigy/point_of_sale_system</li>
 <li>run this to get the dependencies command: flutter pub get </li>
